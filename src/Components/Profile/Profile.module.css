@@ -1,0 +1,15 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #fdf0d5;
+    color: #003049;
+}
+
+.container {
+    width: calc(100% - 0.2em);
+}
+
+.container>* {
+    margin: 0.2em;
+}

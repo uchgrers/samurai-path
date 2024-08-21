@@ -1,0 +1,11 @@
+.item {
+    border: #bdd2cc solid 1px;
+    height: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item a {
+    text-decoration: none;
+}

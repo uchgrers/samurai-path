@@ -1,25 +1,56 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from "./Components/Header/Header";
+import Navbar from "./Components/Navbar/Navbar";
+import {Route, Routes} from "react-router-dom";
+import News from "./Components/News/News";
+import Music from "./Components/Music/Music";
+import Settings from "./Components/Settings/Settings";
+import Login from "./Components/Login/Login";
+import ProfileContainer from "./Components/Profile/ProfileContainer";
+import {lazy, Suspense, useEffect} from "react";
+import {initialize} from "./redux/appReducer";
+import {useDispatch, useSelector} from "react-redux";
+import Preloader from "./Components/Preloader/Preloader";
+import {withSuspense} from "./utils/withSuspense";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const DialogsContainer = lazy(() => import("./Components/Dialogs/DialogsContainer"))
+const UsersContainer = lazy(() => import("./Components/Users/UsersContainer"))
+
+const App = () => {
+
+    const dispatch = useDispatch();
+    const isInitialized = useSelector(state => state.appReducer.isInitialized);
+
+    useEffect(() => {
+        dispatch(initialize())
+    }, [])
+
+    if (!isInitialized) {
+        return <Preloader/>
+    }
+
+    return (
+        <div className="App">
+            <Suspense fallback={<div><Preloader/></div>}>
+                <Header/>
+                <Navbar/>
+                <Routes>
+                    <Route path='/' element={<ProfileContainer/>}/>
+                    <Route path='/profile/*' element={<ProfileContainer/>}/>
+                    <Route path='/profile/:userID' element={<ProfileContainer/>}/>
+                    <Route path='/users'
+                           element={withSuspense(<UsersContainer/>, <div>Loading...</div>)}/>
+                    <Route path='/news' element={<News/>}/>
+                    <Route path='dialogs/*'
+                           element={withSuspense(<DialogsContainer/>, <div>Loading...</div>)}/>
+                    <Route path='/music' element={<Music/>}/>
+                    <Route path='/settings' element={<Settings/>}/>
+                    <Route path='/login' element={<Login/>}/>
+                </Routes>
+            </Suspense>
+
+        </div>
+    );
 }
 
 export default App;

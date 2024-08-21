@@ -1,0 +1,15 @@
+.item {
+    margin-bottom: 1em;
+}
+
+.user {
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    align-items: center;
+}
+
+.avatar {
+    width: 4em;
+    border-radius: 2em;
+}

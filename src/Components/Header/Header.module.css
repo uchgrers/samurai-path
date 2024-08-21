@@ -1,0 +1,47 @@
+.header {
+    grid-column: 1/5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #003049;
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    height: 100%;
+}
+
+.login {
+    margin-right: 1em;
+    min-width: 4em;
+    border-radius: 0.4em;
+    background-color: #003049;
+}
+
+.logout {
+    display: flex;
+    justify-content: space-around;
+    min-width: 8em;
+}
+
+.loginLink {
+    text-decoration: none;
+    color: #fdf0d5;
+}
+
+.smallAvatar {
+    margin-left: 1em;
+    height: 80%;
+    border-radius: 50%;
+}
+
+.logBtn {
+    width: 5em;
+    height: 2em;
+    background-color: #fdf0d5;
+    color: #003049;
+    cursor: pointer;
+    border: none;
+    border-radius: 0.4em;
+}

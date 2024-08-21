@@ -1,0 +1,15 @@
+.navbar {
+    background-color: #003049;
+    display: flex;
+    flex-direction: column;
+    grid-column: 2/3;
+}
+
+.item a{
+    color: #fdf0d5;
+    text-decoration: none;
+}
+
+.item a.active {
+    text-decoration: underline;
+}

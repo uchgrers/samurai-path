@@ -1,0 +1,36 @@
+.item {
+    margin: 5px;
+    min-width: 160px;
+    background-color: #fdf0d5;
+    border-radius: 4px;
+    border: #003049 solid 1px;
+}
+
+.item>* {
+    margin: 4px;
+}
+
+.postContainer {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.postContainer div {
+    margin-left: 10px;
+}
+
+.postText {
+    min-width: 150px;
+    text-align: left;
+    border-radius: 6px;
+}
+
+.item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 30px;
+}
+
+.likesCount {
+    text-align: left;
+}
