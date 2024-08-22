@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import Post from "./Post/Post";
 import classes from './MyPosts.module.css';
 import {reduxForm} from "redux-form";
-import {lengthRestrictionCreator, required} from "../../../utils/Validators/validators";
+import {maxLengthRestrictionCreator, required} from "../../../utils/Validators/validators";
 import {createField, TextArea} from "../../../Common/FieldsControl/TextArea";
 
 const MyPosts = (props) => {
@@ -27,11 +27,12 @@ const MyPosts = (props) => {
 };
 
 const MyPostsForm = (props) => {
+    const lengthRestriction = useMemo(() => maxLengthRestrictionCreator(10), [])
     return (
         <form onSubmit={props.handleSubmit}>
             {createField("Enter post text",
                 "newPostText",
-                [required, lengthRestrictionCreator(10)], TextArea)}
+                [required, lengthRestriction], TextArea)}
             <button>Add post</button>
         </form>
     )

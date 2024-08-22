@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import classes from './Dialogs.module.css'
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
 import {Field, reduxForm} from "redux-form";
-import {lengthRestrictionCreator, required} from "../../utils/Validators/validators";
+import {maxLengthRestrictionCreator, required} from "../../utils/Validators/validators";
 import {TextArea} from "../../Common/FieldsControl/TextArea";
 
 const Dialogs = (props) => {
@@ -34,13 +34,14 @@ const Dialogs = (props) => {
 };
 
 const DialogsForm = (props) => {
+    const lengthRestriction = useMemo(() => (maxLengthRestrictionCreator(15)), [])
     return (
         <form onSubmit={props.handleSubmit}
               className={classes.messageArea}>
             <Field
                 component={TextArea}
                 name="messageText"
-                validate={[required, lengthRestrictionCreator(15)]}
+                validate={[required, lengthRestriction]}
                 cols="30" rows="10"/>
             <button className={classes.addMessageButton}>Send message</button>
         </form>

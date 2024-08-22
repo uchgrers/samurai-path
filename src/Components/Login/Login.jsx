@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
-import {Field, reduxForm} from "redux-form";
+import {reduxForm} from "redux-form";
 import {createField, Input} from "../../Common/FieldsControl/TextArea";
-import {lengthRestrictionCreator, required} from "../../utils/Validators/validators";
+import {
+
+    minLengthRestrictionCreator,
+    required
+} from "../../utils/Validators/validators";
 import {login} from '../../redux/authReducer';
 import classes from './Login.module.css';
 
@@ -28,15 +32,16 @@ const Login = () => {
 };
 
 const LoginForm = (props) => {
+    const lengthRestriction = useMemo(() => minLengthRestrictionCreator(8), [])
     return (
         <form action="" onSubmit={props.handleSubmit}>
             <div className={classes.error}>
                 {props.error}
             </div>
             {createField("Email", "email",
-                [required, lengthRestrictionCreator(20)], Input, "text")}
+                [required], Input, "text")}
             {createField("Password", "password",
-                [required, lengthRestrictionCreator(20)], Input, "password")}
+                [required, lengthRestriction], Input, "password")}
             {createField(null, "rememberMe",
                 [], Input, "checkbox", "Remember me")}
             <div>

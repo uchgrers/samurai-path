@@ -5,7 +5,6 @@ import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import Preloader from "../Preloader/Preloader";
 
 const Profile = (props) => {
-    console.log(props.profile ? props.profile.userId : 'Null')
 
         return (
             <div className={classes.content}>

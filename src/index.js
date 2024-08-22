@@ -12,9 +12,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 export const rerenderEntireTree = () => {
     root.render(
         <React.StrictMode>
-            <BrowserRouter>
+            <BrowserRouter basename={process.env.PUBLIC_URL}>
                 <Provider store={store}>
-                    <App />
+                    <App/>
                 </Provider>
             </BrowserRouter>
         </React.StrictMode>
