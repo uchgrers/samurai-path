@@ -18,12 +18,13 @@ const ProfileContainer = () => {
     })
 
     const {userID} = useParams()
+    const isOwner = !userID;
 
     useEffect(() => {
         dispatch(setProfile(userID))
     }, [userID])
 
-    return <ProfileAuthContainer profile={profile} status={status}/>
+    return <ProfileAuthContainer dispatch={dispatch} isOwner={isOwner} profile={profile} status={status}/>
 }
 
 

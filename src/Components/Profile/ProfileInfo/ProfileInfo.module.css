@@ -1,5 +1,6 @@
 .info {
     display: flex;
+    margin-bottom: 2em;
 }
 
 .avatar {
@@ -11,9 +12,17 @@
     text-align: justify;
     display: flex;
     flex-direction: column;
+    width: 60%;
 }
 
 .name {
     font-weight: bold;
     margin-bottom: 0.2em;
+}
+
+.avatarBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
 }

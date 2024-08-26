@@ -3,6 +3,7 @@ import {profileAPI} from "../API/api";
 const SET_USER_PROFILE = 'profile/SET-USER-PROFILE';
 const SET_STATUS = 'profile/SET-STATUS';
 const ADD_POST = 'profile/ADD-POST';
+const SET_PROFILE_PHOTOS = 'SET_PROFILE_PHOTOS';
 
 const initialState = {
     posts: [
@@ -29,6 +30,11 @@ export const profilePageReducer = (state = initialState, action) => {
                 ...state,
                 profile: action.profile
             }
+        case SET_PROFILE_PHOTOS:
+            return {
+                ...state,
+                profile: {...state.profile, photos: action.photos}
+            }
         case SET_STATUS:
             return {
                 ...state,
@@ -42,6 +48,7 @@ export const profilePageReducer = (state = initialState, action) => {
 export const addPost = (newPostText) => ({type: ADD_POST, newPostText});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const setStatus = (status) => ({type: SET_STATUS, status});
+export const setProfilePhoto = (photos) => ({type: SET_PROFILE_PHOTOS, photos});
 
 export const setProfile = (id) => (dispatch) => {
     return profileAPI.setProfileInfo(id)
@@ -61,5 +68,20 @@ export const updateStatus = (status) => (dispatch) => {
     profileAPI.updateStatus(status || '')
         .then(() => {
             dispatch(setStatus(status))
+        })
+}
+
+export const sendProfilePhoto = (photo) => (dispatch) => {
+    profileAPI.uploadPhoto(photo)
+        .then((res) => {
+            dispatch(setProfilePhoto(res.data.photos))
+        })
+}
+
+export const getUserDescription = (info, id) => (dispatch) => {
+    console.log(info)
+    profileAPI.setUserDescription(info)
+        .then(() => {
+            dispatch(setProfile(id))
         })
 }

@@ -11,7 +11,10 @@ const Profile = (props) => {
                 {
                     props.profile === null ? <Preloader/> :
                         <div className={classes.container}>
-                            <ProfileInfo profile={props.profile} status={props.status}/>
+                            <ProfileInfo dispatch={props.dispatch}
+                                         profile={props.profile}
+                                         status={props.status}
+                                         isOwner={props.isOwner}/>
                             <MyPostsContainer/>
                         </div>
                 }

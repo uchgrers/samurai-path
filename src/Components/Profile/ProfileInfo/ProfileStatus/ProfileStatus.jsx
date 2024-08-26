@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {getStatus, updateStatus} from "../../../redux/profilePageReducer";
+import {getStatus, updateStatus} from "../../../../redux/profilePageReducer";
 import classes from './ProfileStatus.module.css'
 import {useRef, useState} from "react";
 import {useDispatch} from "react-redux";
@@ -11,7 +11,9 @@ const ProfileStatus = (props) => {
     const statusRef = useRef(null);
 
     const changeEditMode = (edit) => {
-        setEditMode(edit)
+        if (props.isOwner) {
+            setEditMode(edit)
+        }
     }
 
     useEffect(() => {
@@ -23,7 +25,9 @@ const ProfileStatus = (props) => {
     }, [editMode, props.status, props.id])
 
     const updateLocalStatus = () => {
-        setLocalStatus(statusRef.current.value)
+        if (props.isOwner) {
+            setLocalStatus(statusRef.current.value)
+        }
     }
 
     const updateGlobalStatus = () => {

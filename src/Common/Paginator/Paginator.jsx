@@ -16,10 +16,6 @@ const Paginator = (props) => {
     const onPageChange = (page) => {
         props.onPageChange(props.pageSize, page)
     }
-    console.log(portionCount)
-    console.log(portionNumber)
-    console.log(leftBorder)
-    console.log(rightBorder)
 
     return (
         <div>

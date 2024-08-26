@@ -38,6 +38,20 @@ export const profileAPI = {
     updateStatus (status) {
         return baseRequestParams.put('profile/status', {status})
             .then(response => response)
+    },
+    uploadPhoto (photo) {
+        const formData = new FormData();
+        formData.append('image', photo);
+        return baseRequestParams.put('profile/photo', formData, {
+            headers: {
+                'Content-Type' : 'multipart/form-data'
+            }
+        })
+            .then(response => response.data)
+    },
+    setUserDescription (info) {
+        return baseRequestParams.put('profile', info)
+            .then(response => response)
     }
 }
 

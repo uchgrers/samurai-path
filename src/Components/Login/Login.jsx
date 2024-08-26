@@ -34,7 +34,7 @@ const Login = () => {
 const LoginForm = (props) => {
     const lengthRestriction = useMemo(() => minLengthRestrictionCreator(8), [])
     return (
-        <form action="" onSubmit={props.handleSubmit}>
+        <form onSubmit={props.handleSubmit}>
             <div className={classes.error}>
                 {props.error}
             </div>

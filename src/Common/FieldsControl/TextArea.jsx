@@ -1,7 +1,6 @@
 import React from 'react';
 import classes from './TextArea.module.css';
 import {Field} from "redux-form";
-import {lengthRestrictionCreator, required} from "../../utils/Validators/validators";
 
 const FormControl = (props) => {
     const hasError = props.meta.touched && props.meta.error;
@@ -23,7 +22,7 @@ export const Input = (props) => {
     return <FormControl {...props}><input {...input} {...restProps}/></FormControl>
 }
 
-export const createField = (placeholder, name, validators, component, type, text) => (
+export const createField = (placeholder, name, validators, component, type, text, onChange) => (
     <div>
         <Field
             validate={[...validators]}
@@ -32,6 +31,7 @@ export const createField = (placeholder, name, validators, component, type, text
             placeholder={placeholder}
             type={type}
             cols="50" rows="5"
+            onChange={onChange}
         />
         {text}
     </div>
