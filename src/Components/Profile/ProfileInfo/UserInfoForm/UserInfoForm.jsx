@@ -43,26 +43,7 @@ const UserInfoForm = (props) => {
 };
 
 const ReduxUserInfoForm = reduxForm({
-    form: 'userInfoForm',
-    onSubmit: (values) => {
-        const formData = {
-            fullName: values.fullName,
-            aboutMe: values.aboutMe,
-            lookingForAJobDescription: values.lookingForAJobDescription,
-            contacts: {
-                facebook: values.facebook,
-                website: values.website,
-                vk: values.vk,
-                twitter: values.twitter,
-                instagram: values.instagram,
-                youtube: values.youtube,
-                github: values.github,
-                mainLink: values.mainLink
-            }
-        }
-        console.log('Отправка данных формы:', formData);
-    }
-
+    form: 'userInfoForm'
 })(UserInfoForm)
 
 export default ReduxUserInfoForm;

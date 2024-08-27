@@ -11,8 +11,3 @@ export const minLengthRestrictionCreator = (length) => (value) => {
     return value && value.length < length ?
         `Min length is ${length} symbols` : null
 }
-
-export const lengthRestriction10 = (value) => {
-    return value && value.length < 10 ?
-        `Min length is ${10} symbols` : null
-}

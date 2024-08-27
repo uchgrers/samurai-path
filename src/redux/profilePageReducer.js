@@ -79,7 +79,6 @@ export const sendProfilePhoto = (photo) => (dispatch) => {
 }
 
 export const getUserDescription = (info, id) => (dispatch) => {
-    console.log(info)
     profileAPI.setUserDescription(info)
         .then(() => {
             dispatch(setProfile(id))

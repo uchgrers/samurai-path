@@ -39,7 +39,6 @@ export const userInfoInitialValuesConstructor = (formData) => {
             newFormData[key] = ''
         }
     })
-    console.log(newFormData)
     return newFormData
 }
 
