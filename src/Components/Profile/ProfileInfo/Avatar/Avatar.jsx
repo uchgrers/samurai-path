@@ -14,9 +14,14 @@ const Avatar = (props) => {
         <div className={s.item}>
             <img src={props.photo || userPhoto}
                  alt="Avatar"
-                 className={classes.avatar}/>
-            <div className={classes.uploadPhoto}>
-                {props.isOwner && <input onChange={uploadPhoto} type="file"></input>}
+                 className={s.avatar}/>
+            <div className={s.uploadPhotoContainer}>
+                {props.isOwner &&
+                    <label >
+                        <input onChange={uploadPhoto} type="file"></input>
+                        <span className={s.uploadPhotoButton}>Choose file</span>
+                    </label>
+                }
             </div>
         </div>
     );

@@ -60,13 +60,16 @@ export const authAPI = {
         return baseRequestParams.get('auth/me')
             .then(response => response.data)
     },
-    login (email, password, rememberMe) {
-        return baseRequestParams.post('auth/login', {email, password, rememberMe})
+    login (email, password, rememberMe, captcha) {
+        return baseRequestParams.post('auth/login', {email, password, rememberMe, captcha})
             .then(response => response.data)
     },
     logout () {
         return baseRequestParams.delete('auth/login')
-    },
+    }
+}
+
+export const captchaAPI = {
     getCaptcha () {
         return baseRequestParams.get('security/get-captcha-url')
             .then(response => response.data)

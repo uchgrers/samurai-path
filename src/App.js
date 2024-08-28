@@ -1,7 +1,7 @@
 import './App.css';
 import Header from "./Components/Header/Header";
 import Navbar from "./Components/Navbar/Navbar";
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
@@ -22,7 +22,16 @@ const App = () => {
     const isInitialized = useSelector(state => state.appReducer.isInitialized);
 
     useEffect(() => {
-        dispatch(initialize())
+        dispatch(initialize());
+        const errorHandling = () => {
+            alert('Some error occurred')
+        }
+        window.addEventListener('unhandledrejection', () => {
+            errorHandling()
+        });
+        return () => {
+            window.removeEventListener('unhandledrejection', errorHandling)
+        }
     }, [])
 
     if (!isInitialized) {
@@ -35,7 +44,7 @@ const App = () => {
                 <Header/>
                 <Navbar/>
                 <Routes>
-                    <Route path='/' element={<ProfileContainer/>}/>
+                    <Route path='/' element={<Navigate to='profile'/>}/>
                     <Route path='/profile/*' element={<ProfileContainer/>}/>
                     <Route path='/profile/:userID' element={<ProfileContainer/>}/>
                     <Route path='/users'

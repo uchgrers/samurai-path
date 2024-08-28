@@ -44,7 +44,7 @@ const ProfileStatus = (props) => {
                                autoFocus={true}
                                onChange={updateLocalStatus}
                 /> :
-                <div onDoubleClick={() => changeEditMode(true)}>{props.status || '----'}</div>}
+                <div onDoubleClick={() => changeEditMode(true)}><b>Status: </b>{props.status || '----'}</div>}
         </div>
     );
 };

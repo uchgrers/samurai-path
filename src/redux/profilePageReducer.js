@@ -1,4 +1,5 @@
 import {profileAPI} from "../API/api";
+import {stopSubmit} from "redux-form";
 
 const SET_USER_PROFILE = 'profile/SET-USER-PROFILE';
 const SET_STATUS = 'profile/SET-STATUS';
@@ -79,8 +80,15 @@ export const sendProfilePhoto = (photo) => (dispatch) => {
 }
 
 export const getUserDescription = (info, id) => (dispatch) => {
-    profileAPI.setUserDescription(info)
-        .then(() => {
-            dispatch(setProfile(id))
-        })
+    return new Promise((resolve, reject) => {
+        profileAPI.setUserDescription(info)
+            .then((res) => {
+                if (res.data.resultCode === 0) {
+                    resolve(dispatch(setProfile(id)))
+                } else {
+                    reject(dispatch(stopSubmit('userInfoForm', {'website': res.data.messages[0].substring(0, 18)})))
+                }
+            })
+    })
+
 }

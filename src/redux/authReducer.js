@@ -1,4 +1,4 @@
-import {authAPI} from "../API/api";
+import {authAPI, captchaAPI} from "../API/api";
 import {stopSubmit} from "redux-form";
 
 const SET_AUTH_USER_DATA = 'auth/SET-AUTH-USER-DATA';
@@ -9,7 +9,7 @@ const initialState = {
     email: null,
     login: null,
     isAuth: false,
-    captcha: ''
+    captchaURL: ''
 }
 
 export const authReducer = (state = initialState, action) => {
@@ -24,14 +24,14 @@ export const authReducer = (state = initialState, action) => {
         case SET_CAPTCHA:
             return {
                 ...state,
-                captcha: action.captcha
+                captchaURL: action.captchaURL
             }
         default:
             return state
     }
 }
 
-export const setCaptcha = (captcha) => ({type: SET_CAPTCHA, captcha})
+export const setCaptcha = (captchaURL) => ({type: SET_CAPTCHA, captchaURL})
 
 export const setAuthUserData = ({userID, login, email}, isAuth) => ({
     type: SET_AUTH_USER_DATA,
@@ -48,15 +48,26 @@ export const setUserData = () => (dispatch) => {
         })
 }
 
-export const login = (email, password, rememberMe) => (dispatch) => {
-    authAPI.login(email, password, rememberMe)
+export const login = (email, password, rememberMe, captcha) => (dispatch) => {
+    authAPI.login(email, password, rememberMe, captcha)
         .then((data) => {
             if (data.resultCode === 0) {
                 dispatch(setUserData())
+                dispatch(setCaptcha(''))
             } else {
-                dispatch(stopSubmit('loginForm', {_error: data.messages[0]}))
+                if (data.messages[0] === 'Incorrect anti-bot symbols') {
+                    dispatch(stopSubmit('loginForm', {_error: 'Submit captcha'}))
+                    dispatch(getCaptcha())
+                } else {
+                    dispatch(stopSubmit('loginForm', {_error: data.messages[0]}))
+                }
             }
         })
+}
+
+export const getCaptcha = () => (dispatch) => {
+    captchaAPI.getCaptcha()
+        .then(res => dispatch(setCaptcha(res.url)))
 }
 
 export const logout = () => (dispatch) => {

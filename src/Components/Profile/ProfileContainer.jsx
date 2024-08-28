@@ -17,7 +17,7 @@ const ProfileContainer = () => {
         return state.profilePage.status
     })
 
-    const {userID} = useParams()
+    let {userID} = useParams() || profile.userId;
     const isOwner = !userID;
 
     useEffect(() => {

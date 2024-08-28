@@ -4,11 +4,16 @@ import classes from './MyPosts.module.css';
 import {reduxForm} from "redux-form";
 import {maxLengthRestrictionCreator, required} from "../../../utils/Validators/validators";
 import {createField, TextArea} from "../../../Common/FieldsControl/TextArea";
+import {useSelector} from "react-redux";
 
 const MyPosts = (props) => {
+    const userAvatar = useSelector(state => {
+        return state.profilePage.profile.photos.small
+    })
 
     const posts = props.posts
-        .map(post => <Post key={post.id + 'post key'}
+        .map(post => <Post userAvatar={userAvatar}
+                           key={post.id + 'post key'}
                            id={post.id} postText={post.postText}
                            likesCount={post.likesCount}/>)
         .reverse()

@@ -12,6 +12,7 @@ const UserInfo = (props) => {
             <div>
                 {'Looking for a job description: ' + props.lookingForAJobDescription || null}
             </div>
+            <div><b>Contacts:</b></div>
             {Object.keys(props.contacts).map(key => {
                 return <Contact key={key} contactKey={key} contactValue={props.contacts[key] || '-'}/>
             })}

@@ -14,8 +14,8 @@ const ProfileInfo = (props) => {
     const formInitialValues = userInfoInitialValuesConstructor(props.profile)
 
     const confirmEdit = (formData) => {
-        setEditMode(false)
         dispatch(getUserDescription(userInfoFormConstructor(formData), props.profile.userId))
+            .then(() => setEditMode(false))
     }
 
     return (
